@@ -6,6 +6,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
+import java.time.DayOfWeek;
+
 import static es.uma.informatica.mps.Calendario.diaSemana;
 import static java.time.DayOfWeek.*;
 import static org.assertj.core.api.Assertions.*;
@@ -24,7 +27,8 @@ public class CalendarioTest {
         @DisplayName("Anyo 2023 (no bisiesto, no divisible entre 4)")
         @Tag("21")
         public void shouldAnyoNotDivisibleBy4ReturnCorrectDayOfWeek() {
-            assertThat(diaSemana(1, 3, 2023))
+            DayOfWeek actualDay = diaSemana(1, 3, 2023);
+            assertThat(actualDay)
                     .isEqualTo(WEDNESDAY);
         }
 
@@ -32,7 +36,8 @@ public class CalendarioTest {
         @DisplayName("Anyo 2100 (no bisiesto, divisible entre 4 y entre 100 pero no entre 400)")
         @Tag("22")
         public void shouldAnyoDivisibleBy4AndBy100ButNotBy400ReturnCorrectDayOfWeek() {
-            assertThat(diaSemana(1, 3, 2100))
+            DayOfWeek actualDay = diaSemana(1, 3, 2100);
+            assertThat(actualDay)
                     .isEqualTo(MONDAY);
         }
 
@@ -45,7 +50,8 @@ public class CalendarioTest {
         @Tag("17")
         @Tag("19")
         public void shouldAnyo1004Mes1Dia1AndMes2Dia29ReturnCorrectDayOfWeek() {
-            assertThat(diaSemana(1, 1, 1004))
+            DayOfWeek actualDay = diaSemana(1, 1, 1004);
+            assertThat(actualDay)
                     .isEqualTo(SATURDAY);
 
             assertThatCode(() -> {
@@ -63,10 +69,12 @@ public class CalendarioTest {
         @Tag("17")
         @Tag("20")
         public void shouldAnyo1600Mes4Dia30AndMes3Dia31ReturnCorrectDayOfWeek() {
-            assertThat(diaSemana(30, 4, 1600))
+            DayOfWeek actualDay = diaSemana(30, 4, 1600);
+            assertThat(actualDay)
                     .isEqualTo(SUNDAY);
 
-            assertThat(diaSemana(31, 3, 1600))
+            actualDay = diaSemana(31, 3, 1600);
+            assertThat(actualDay)
                     .isEqualTo(FRIDAY);
         }
     }
